@@ -1,11 +1,10 @@
 # Standard imports
 from os import getcwd
-from os.path import join
+from os.path import join, dirname
 
 # PyPi imports
 from selenium.webdriver import Chrome, ChromeOptions
-
-
+import chromedriver_binary
 
 
 class driver:
@@ -21,10 +20,12 @@ class driver:
 		)
 		options.headless = True
 		# https://stackoverflow.com/questions/43571119/loading-of-unpacked-extensions-is-disabled-by-the-administrator
-		executable_path = join(getcwd(), 'Lib', 'site-packages', 
-			"chromedriver_binary", "chromedriver")
-		return Chrome(
-			executable_path = executable_path,
-			options = options
-		)
+		executable_path = join(dirname(chromedriver_binary.__file__), "chromedriver")
+		try:
+			return Chrome(
+				executable_path = executable_path,
+				options = options
+			)
+		except:
+			return executable_path
 		
