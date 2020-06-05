@@ -1,15 +1,12 @@
+# PyPi imports
+import pytest
+
 # Project imports
 from icecreamscrape.webdriver import driver
 
-import os
-
-
+@pytest.mark.selenium
 def test_init_driver(webdriver):
-	driver = webdriver.driver
-	try:
-		driver.get("http://google.com")
-	except:
-		
-		assert 1 == 0, os.path.exists(os.path.join(driver, "chromedriver"))
-	assert driver.title == "Google", driver
+	webdriver.driver.get("http://google.com")
+	assert webdriver.driver.title == "Google"
+
 
