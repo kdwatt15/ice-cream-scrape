@@ -1,0 +1,14 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+os:
+  - linux
+install:
+  - pip install -e .
+  - pip install pytest coverage
+script:
+  - coverage run -m pytest
+after_success:
+  - coveralls
