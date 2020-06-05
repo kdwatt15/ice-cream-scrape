@@ -17,7 +17,7 @@ setuptools.setup(
 	#long_description=long_description,
 	long_description_content_type="test/markdown",
 	packages=setuptools.find_packages(include=["icecreamscrape"]),
-	package_dir={'': 'lib'},
+	package_dir={'': 'Lib'},
 	install_requires=install_requires,
 	license="None",
 	python_requires=">=3.5"
