@@ -11,5 +11,10 @@ def main(args=sys.argv[1:]):
 	params = cli(args).params
 
 
-if __name__ == "__main__":
-	main()
+def init():
+	""" Init construction allows for testing """
+	if __name__ == "__main__":
+		sys.exit(main())
+
+
+init()
