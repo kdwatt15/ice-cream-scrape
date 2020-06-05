@@ -10,6 +10,6 @@ def test_init_driver(webdriver):
 		driver.get("http://google.com")
 	except:
 		
-		assert 1 == 0, os.path_exists(os.path.join(driver, "chromedriver"))
+		assert 1 == 0, os.path.exists(os.path.join(driver, "chromedriver"))
 	assert driver.title == "Google", driver
 
