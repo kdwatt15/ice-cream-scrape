@@ -9,6 +9,6 @@ install:
   - pip install -e .
   - pip install pytest coverage
 script:
-  - coverage run -m pytest
+  - coverage run -m pytest --without-selenium
 after_success:
   - coveralls
