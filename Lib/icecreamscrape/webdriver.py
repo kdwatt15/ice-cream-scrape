@@ -1,6 +1,7 @@
 # Standard imports
 from os import getcwd
 from os.path import join, dirname
+from contextlib import contextmanager
 
 # PyPi imports
 from selenium.webdriver import Chrome, ChromeOptions
@@ -8,11 +9,19 @@ import chromedriver_binary
 from chromedriver_binary.utils import get_chromedriver_filename
 
 
+@contextmanager
+def driver_factory(url):
+	webdriver = driver(url).driver
+	webdriver.get(url)
+	yield webdriver
+
+
 class driver:
 	
-	def __init__(self):
+	def __init__(self, url):
 		exe_path = self.__find_exe()
 		options = self.__init_options()
+		self.root_url = url
 		self.driver = Chrome(
 			executable_path = exe_path, options = options
 		)
