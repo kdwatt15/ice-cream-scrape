@@ -1,11 +1,12 @@
 # PyPi imports
 import pytest
 import mock
-import subprocess
+import os
 
 # Project imports
 from icecreamscrape import __main__
 from icecreamscrape.__main__ import main
+import icecreamscrape
 
 
 def test_pos_init():
@@ -22,10 +23,25 @@ def test_neg_init():
 	with mock.patch.object(__main__, "__name__", "not-main"):
 		assert __main__.init() is None
 	
-
-def test_main():
+@pytest.mark.parametrize(
+	("args"),
+	(
+		(['http://google.com']),
+		(['http://google.com', '-f', '-d'])
+	)
+)
+def test_main(monkeypatch, args):
 	""" Tests the main function given test arguments """
-	main(args=['http://google.com'])
+	def mock_func(*args, **kwargs):
+		pass
+	monkeypatch.setattr(os, 'makedirs', mock_func)
+	monkeypatch.setattr(icecreamscrape.webdriver, 'driver_factory', 
+		mock_func)
+	monkeypatch.setattr(icecreamscrape.composites, 'download_documents',
+		mock_func)
+	monkeypatch.setattr(icecreamscrape.composites, 'fetch_tables',
+		mock_func)
+	main(args=args)
 	
 	
 

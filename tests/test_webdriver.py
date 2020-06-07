@@ -2,11 +2,11 @@
 import pytest
 
 # Project imports
-from icecreamscrape.webdriver import driver
+from icecreamscrape.webdriver import driver_factory
 
 @pytest.mark.selenium
-def test_init_driver(webdriver):
-	webdriver.driver.get("http://google.com")
-	assert webdriver.driver.title == "Google"
+def test_driver_factory():
+	with driver_factory('http://google.com') as d:
+		assert d.driver.title == 'Google'
 
 

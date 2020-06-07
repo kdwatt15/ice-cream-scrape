@@ -1,9 +1,6 @@
 # PyPi imports
 import pytest
-
-# Project imports
-from icecreamscrape.htmlparser import soupparser
-from icecreamscrape.webdriver import driver
+from bs4 import BeautifulSoup
 
 
 def pytest_addoption(parser):
@@ -30,12 +27,23 @@ def pytest_collection_modifyitems(config, items):
 				item.add_marker(skip_selenium)
 
 
-@pytest.fixture
-def sp():
-	html = '<html><p>test</p><a class="test">test</a></html>'
-	return soupparser(html=html)
+class FakeDriver:
 
+	def __init__(self):
+		self.driver = NestedClass()
+		
+		
+class NestedClass:
+	
+	def __init__(self):
+		self.page_source = "<table><tr><td>1</td></tr><tr><td>2</td></tr></table>"
+		
+		
 @pytest.fixture
-def webdriver():
-	return driver()
-
+def fake_driver():
+	return FakeDriver()
+	
+	
+@pytest.fixture
+def table_soup():
+	return BeautifulSoup(NestedClass().page_source, features='html.parser')
