@@ -1,10 +1,12 @@
 # Standard imports
 from os import getcwd
-from os.path import join, dirname
+from os.path import join
+from os.path import dirname
 from contextlib import contextmanager
 
 # PyPi imports
-from selenium.webdriver import Chrome, ChromeOptions
+from selenium.webdriver import Chrome
+from selenium.webdriver import ChromeOptions
 import chromedriver_binary
 from chromedriver_binary.utils import get_chromedriver_filename
 

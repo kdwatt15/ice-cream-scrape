@@ -5,7 +5,6 @@ import os
 
 # Project imports
 from icecreamscrape import __main__
-from icecreamscrape.__main__ import main
 import icecreamscrape
 
 
@@ -27,7 +26,7 @@ def test_neg_init():
 	("args"),
 	(
 		(['http://google.com']),
-		(['http://google.com', '-f', '-d'])
+		(['http://google.com', '-f'])
 	)
 )
 def test_main(monkeypatch, args):
@@ -41,7 +40,7 @@ def test_main(monkeypatch, args):
 		mock_func)
 	monkeypatch.setattr(icecreamscrape.composites, 'fetch_tables',
 		mock_func)
-	main(args=args)
+	__main__.main(args=args)
 	
 	
 
