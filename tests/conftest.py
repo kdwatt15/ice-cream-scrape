@@ -3,6 +3,7 @@ import pytest
 from bs4 import BeautifulSoup
 
 
+
 def pytest_addoption(parser):
 	parser.addoption(
 		"--without-selenium", action="store_true", default=False,
@@ -47,3 +48,5 @@ def fake_driver():
 @pytest.fixture
 def table_soup():
 	return BeautifulSoup(NestedClass().page_source, features='html.parser')
+
+	
