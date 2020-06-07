@@ -39,11 +39,12 @@ class cli:
 			help=self.help_messages['fetch-tables']
 		)
 			
-	def __validate_inputs(self, error_message=[]):
+	def __validate_inputs(self):
+		err_message = []
 		""" Placeholder to later validate the command line inputs """
 		if url(self.params.url) is not True:
-			error_message.append("URL not valid. Please correct.")	
-		return error_message
+			err_message.append(f"'{self.params.url}' not a valid URL.")	
+		return err_message
 		
 	def __aggregate_features(self, active_features=[]):
 		for param, value in self.params.__dict__.items():

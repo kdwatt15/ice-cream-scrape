@@ -11,9 +11,11 @@ from chromedriver_binary.utils import get_chromedriver_filename
 
 @contextmanager
 def driver_factory(url):
-	webdriver = driver(url).driver
-	webdriver.get(url)
-	yield webdriver
+	webdriver = driver(url)
+	try:
+		yield webdriver
+	finally:
+		webdriver.teardown()
 
 
 class driver:
@@ -25,6 +27,7 @@ class driver:
 		self.driver = Chrome(
 			executable_path = exe_path, options = options
 		)
+		self.driver.get(url)
 		
 	def __init_options(self):
 		options = ChromeOptions()
@@ -41,3 +44,6 @@ class driver:
 			dirname(chromedriver_binary.__file__),
 			get_chromedriver_filename()
 		)
+		
+	def teardown(self):
+		self.driver.quit()
