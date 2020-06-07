@@ -22,14 +22,13 @@ def test_neg_init():
 	with mock.patch.object(__main__, "__name__", "not-main"):
 		assert __main__.init() is None
 	
-@pytest.mark.parametrize(
-	("args"),
-	(
-		(['http://google.com']),
-		(['http://google.com', '-f'])
-	)
-)
-def test_main(monkeypatch, args):
+
+def test_main_no_args():
+	""" Tests the main function given test arguments """
+	__main__.main(args=['http://google.com'])
+	
+@pytest.mark.selenium
+def test_main_with_args(monkeypatch):
 	""" Tests the main function given test arguments """
 	def mock_func(*args, **kwargs):
 		pass
@@ -40,7 +39,7 @@ def test_main(monkeypatch, args):
 		mock_func)
 	monkeypatch.setattr(icecreamscrape.composites, 'fetch_tables',
 		mock_func)
-	__main__.main(args=args)
+	__main__.main(args=['http://google.com', '-f'])
 	
 	
 

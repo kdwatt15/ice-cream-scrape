@@ -16,6 +16,7 @@ def driver_factory(url):
 	webdriver = driver(url)
 	try:
 		yield webdriver
+		raise(ValueError('no'))
 	finally:
 		webdriver.teardown()
 
